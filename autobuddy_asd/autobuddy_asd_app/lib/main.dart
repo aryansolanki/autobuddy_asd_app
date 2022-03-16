@@ -13,7 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: loading(),
-    );
+        // home: loading(),
+        routes: {
+          '/': (context) => loading(),
+          '/option': (context) => option(),
+        });
   }
 }
