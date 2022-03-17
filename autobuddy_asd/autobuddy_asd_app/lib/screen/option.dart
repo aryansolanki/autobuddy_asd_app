@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:autobuddy_asd_app/colour.dart';
 
 class option extends StatefulWidget {
   const option({Key? key}) : super(key: key);
@@ -10,8 +11,63 @@ class option extends StatefulWidget {
 class _optionState extends State<option> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("asd/elderly option"),
-    );
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: appbar_colour,
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Image(
+                image: AssetImage('assets/Name.png'),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                child: RaisedButton(
+                  onPressed: () {},
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      'Autism',
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontFamily: 'Inter_Medium',
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  color: option_button_colour,
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                child: RaisedButton(
+                  onPressed: () {},
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      'Elderly',
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontFamily: 'Inter_Medium',
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  color: option_button_colour,
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }

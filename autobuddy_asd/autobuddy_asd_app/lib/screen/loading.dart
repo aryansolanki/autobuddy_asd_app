@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:autobuddy_asd_app/colour.dart';
 
 class loading extends StatefulWidget {
   const loading({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _loadingState extends State<loading> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.amberAccent, // ==========>Change colour later
+          backgroundColor: appbar_colour,
         ),
         body: Center(
           child: Column(
