@@ -1,6 +1,9 @@
-import 'package:autobuddy_asd_app/screen/loading.dart';
 import 'package:flutter/material.dart';
+
+import 'package:autobuddy_asd_app/screen/loading.dart';
 import 'package:autobuddy_asd_app/screen/option.dart';
+import 'package:autobuddy_asd_app/auth/wrapper.dart';
+
 import 'package:flutter/services.dart'; //to colour status bar
 import 'package:autobuddy_asd_app/colour.dart';
 
@@ -25,6 +28,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => loading(),
           '/option': (context) => option(),
+          '/wrapper': (context) => wrapper(),
         });
   }
 }

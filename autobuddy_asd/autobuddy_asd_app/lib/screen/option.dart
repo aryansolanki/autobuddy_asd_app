@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:autobuddy_asd_app/colour.dart';
+import 'package:autobuddy_asd_app/auth/wrapper.dart';
 
 class option extends StatefulWidget {
   const option({Key? key}) : super(key: key);
@@ -26,7 +27,9 @@ class _optionState extends State<option> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 50),
                 child: RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed("/wrapper");
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   child: Container(
