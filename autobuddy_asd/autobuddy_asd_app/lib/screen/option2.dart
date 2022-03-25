@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:autobuddy_asd_app/colour.dart';
+import 'package:autobuddy_asd_app/text.dart';
 
 class option2 extends StatefulWidget {
   const option2({Key? key}) : super(key: key);
@@ -35,7 +37,7 @@ class _option2State extends State<option2> {
                       'Sign In',
                       style: TextStyle(
                         fontSize: 30.0,
-                        fontFamily: 'Inter_Medium',
+                        fontFamily: text1,
                         color: Colors.white,
                       ),
                     ),
@@ -58,7 +60,7 @@ class _option2State extends State<option2> {
                       'Sign Up',
                       style: TextStyle(
                         fontSize: 30.0,
-                        fontFamily: 'Inter_Medium',
+                        fontFamily: text1,
                         color: Colors.white,
                       ),
                     ),
