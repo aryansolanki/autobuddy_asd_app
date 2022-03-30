@@ -5,6 +5,7 @@ import 'package:autobuddy_asd_app/screen/loading.dart';
 import 'package:autobuddy_asd_app/screen/option.dart';
 import 'package:autobuddy_asd_app/auth/wrapper.dart';
 import 'package:autobuddy_asd_app/screen/option2.dart';
+import 'package:autobuddy_asd_app/screen/sign_in.dart';
 
 import 'package:flutter/services.dart'; //to colour status bar
 import 'package:autobuddy_asd_app/colour.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
           '/option': (context) => option(),
           '/wrapper': (context) => wrapper(),
           '/option2': (context) => option2(),
+          '/sign_in': (context) => sign_in(),
         });
   }
 }
