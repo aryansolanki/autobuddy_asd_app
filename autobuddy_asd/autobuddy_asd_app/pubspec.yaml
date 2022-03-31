@@ -77,6 +77,9 @@ flutter:
     - family: Inter_Medium
       fonts:
         - asset: fonts/Inter-Medium.ttf
+    - family: Lobster_Regular
+      fonts:
+        - asset: fonts/Lobster-Regular.ttf
 
   #
   # For details regarding fonts from package dependencies,
