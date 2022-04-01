@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:autobuddy_asd_app/text.dart';
 import 'package:autobuddy_asd_app/colour.dart';
 
+//for basic sign in button
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+
 //NOTE:- in this page first container present for background pic
 //on that scaffold with all widget tree.
 // scaffold has stack with 2 children
@@ -98,7 +101,7 @@ class _sign_inState extends State<sign_in> {
                                   borderRadius: BorderRadius.circular(10),
                                 )),
                           ),
-
+                          //sign up and forgot password row
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -128,36 +131,46 @@ class _sign_inState extends State<sign_in> {
                                   )),
                             ],
                           ),
+
                           Divider(
                             color: Colors.cyan[900],
                             height: 0,
                             thickness: 2,
                           ),
-                          //Google sign in
-//----------------------------------------XXXXXXXXXXXXXXXXXXXXXXXXXX------------------
+
                           SizedBox(
-                            height: 40,
+                            height: 10,
                           ),
+
+                          //circular arrow
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Text(
-                                'Sign in',
-                                style: TextStyle(
-                                    fontSize: 27, fontWeight: FontWeight.w700),
-                              ),
                               CircleAvatar(
                                 radius: 30,
-                                backgroundColor: Color(0xff4c505b),
+                                backgroundColor: Colors.white,
                                 child: IconButton(
-                                    color: Colors.white,
-                                    onPressed: () {},
+                                    color: Colors.black,
+                                    onPressed:
+                                        () {}, //--------------------->enter routing for auth with email and password here
                                     icon: Icon(
                                       Icons.arrow_forward,
                                     )),
                               )
                             ],
-                          )
+                          ),
+
+                          SizedBox(
+                            height: 20,
+                          ),
+
+                          //Google sign in
+                          SignInButton(
+                            Buttons.Google,
+                            text: "Continue with Google",
+                            onPressed:
+                                () {}, //--------------------->enter google auth routing here
+                          ),
                         ],
                       ),
                     )

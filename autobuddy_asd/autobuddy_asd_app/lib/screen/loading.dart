@@ -27,6 +27,8 @@ class _loadingState extends State<loading> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors
+            .white, // background changed to white to match background of gif
         appBar: AppBar(
           backgroundColor: appbar_colour,
         ),
@@ -37,12 +39,11 @@ class _loadingState extends State<loading> {
               Image(
                 image: AssetImage('assets/Name.png'),
               ),
-              Container(
-                child: SpinKitPumpingHeart(
-                  color: Colors.red[600],
-                  size: 75.0,
-                ),
-              )
+              Image.asset(
+                "assets/logo_loading.gif",
+                height: 250.0,
+                width: 250.0,
+              ),
             ],
           ),
         ));

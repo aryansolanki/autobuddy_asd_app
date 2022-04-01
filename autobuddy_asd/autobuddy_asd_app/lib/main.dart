@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner:
             false, // to remove debug strip from right side up corner
 
-        // home: option(),
+        //home: loading(),
         routes: {
           '/': (context) => loading(),
           '/option': (context) => option(),

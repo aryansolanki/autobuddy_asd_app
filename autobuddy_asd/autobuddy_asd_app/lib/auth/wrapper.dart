@@ -17,14 +17,14 @@ class _wrapperState extends State<wrapper> {
           Text('wrapper page'),
           RaisedButton(
             onPressed: () {},
-            child: Text("Dashboard"),
+            child: Text("if logged in ==>Dashboard"),
           ),
           RaisedButton(
             onPressed: () {
               Navigator.of(context).pushNamed("/option2");
             },
-            child: Text("sign in/sign up page"),
-          )
+            child: Text("if not logged in==>login/sign up"),
+          ),
         ],
       ),
       //this page will not be visible when ready just it will work in background

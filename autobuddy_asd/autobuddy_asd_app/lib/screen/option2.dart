@@ -36,7 +36,7 @@ class _option2State extends State<option2> {
                   child: Container(
                     padding: EdgeInsets.all(10.0),
                     child: Text(
-                      'Sign In',
+                      'Login',
                       style: TextStyle(
                         fontSize: 30.0,
                         fontFamily: text1,
