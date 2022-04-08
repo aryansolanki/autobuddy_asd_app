@@ -106,8 +106,9 @@ class _sign_inState extends State<sign_in> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               TextButton(
-                                onPressed:
-                                    () {}, //--------------------->enter routing here
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed("/sign_up1");
+                                },
                                 child: Text(
                                   'Sign Up',
                                   textAlign: TextAlign.left,

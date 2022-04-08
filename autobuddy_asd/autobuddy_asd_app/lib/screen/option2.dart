@@ -53,7 +53,9 @@ class _option2State extends State<option2> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 50),
                 child: RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed("/sign_up1");
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   child: Container(
