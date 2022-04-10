@@ -6,17 +6,15 @@ import 'package:autobuddy_asd_app/custom_widgets/sign_up_page/theme.dart';
 import 'package:autobuddy_asd_app/colour.dart';
 import 'package:autobuddy_asd_app/text.dart';
 
-
 class sign_up1 extends StatefulWidget {
-  const sign_up1({ Key? key }) : super(key: key);
+  const sign_up1({Key? key}) : super(key: key);
 
   @override
   State<sign_up1> createState() => _sign_up1State();
 }
 
 class _sign_up1State extends State<sign_up1> {
-
-  bool? check_box=false;
+  dynamic check_box = false;
 
   @override
   Widget build(BuildContext context) {
@@ -74,44 +72,30 @@ class _sign_up1State extends State<sign_up1> {
             SizedBox(
               height: 20,
             ),
-
-            CheckboxListTile (
-              title: const Text("Agree to terms and conditions."),
-              controlAffinity:ListTileControlAffinity.leading,
-              value: check_box,
-              onChanged: (value) {
-                    setState(() {
-                      check_box = value;// state to check box is in check_box variable
-                    });
-                  },
-            ),
-                    
-            SizedBox(
-              height: 20,
-            ),
-
             Container(
-                padding: EdgeInsets.symmetric(horizontal: 50),
-                child: RaisedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed("/sign_up1");
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Container(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        fontFamily: text1,
-                        color: Colors.white,
-                      ),
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              child: RaisedButton(
+                onPressed: check_box
+                    ? () {
+                        Navigator.of(context).pushNamed("/sign_in");
+                      }
+                    : null,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontFamily: text1,
+                      color: Colors.white,
                     ),
                   ),
-                  color: option_button_colour,
                 ),
-              ),         
+                color: option_button_colour,
+              ),
+            ),
           ],
         ),
       ),
