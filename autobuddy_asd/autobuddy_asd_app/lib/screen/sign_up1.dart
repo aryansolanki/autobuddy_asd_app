@@ -14,89 +14,67 @@ class sign_up1 extends StatefulWidget {
 }
 
 class _sign_up1State extends State<sign_up1> {
-  dynamic check_box = false;
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 70,
-            ),
-            Padding(
-              padding: kDefaultPadding,
-              child: Text(
-                'Create Account',
-                style: titleText,
+    return Container(
+      // scaffold does not have background image property so used container
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('assets/background1.png'),
+            fit: BoxFit.cover), //fit to resize image and cover full screen
+      ),
+      child: Scaffold(
+        backgroundColor: Colors
+            .transparent, //default colour is white which will hide background pic so set it as transparent
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 50,
               ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Padding(
-              padding: kDefaultPadding,
-              child: Row(
-                children: [
-                  Text(
-                    'Already a member?',
-                    style: subTitle,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushNamed("/sign_in");
-                    },
-                    child: Text(
-                      'Log In',
-                      style: textButton.copyWith(
-                        decoration: TextDecoration.underline,
-                        decorationThickness: 1,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: kDefaultPadding,
-              child: SignUpForm(),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 50),
-              child: RaisedButton(
-                onPressed: check_box
-                    ? () {
-                        Navigator.of(context).pushNamed("/sign_in");
-                      }
-                    : null,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Container(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      fontSize: 30.0,
-                      fontFamily: text1,
-                      color: Colors.white,
-                    ),
-                  ),
+              Padding(
+                padding: kDefaultPadding,
+                child: Text(
+                  'Create Account',
+                  style: titleText,
                 ),
-                color: option_button_colour,
               ),
-            ),
-          ],
+              Padding(
+                padding: kDefaultPadding,
+                child: Row(
+                  children: [
+                    Text(
+                      'Already a member?',
+                      style: subTitle,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed("/sign_in");
+                      },
+                      child: Text(
+                        'Log In',
+                        style: textButton.copyWith(
+                          decoration: TextDecoration.underline,
+                          decorationThickness: 1,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: kDefaultPadding,
+                child: SignUpForm(),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,7 +1,12 @@
 // real form
 import 'package:flutter/material.dart';
 
-import 'package:form_field_validator/form_field_validator.dart';
+import 'package:form_field_validator/form_field_validator.dart'; //for multi validation
+
+import 'package:autobuddy_asd_app/text.dart';
+import 'package:autobuddy_asd_app/colour.dart';
+
+import 'package:autobuddy_asd_app/screen/sign_in.dart'; //routing
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -57,11 +62,22 @@ class _SignUpFormState extends State<SignUpForm> {
         child: Column(
           children: <Widget>[
             TextFormField(
+              style: TextStyle(
+                color: Colors.black,
+                decorationColor: Colors.black, //Font color change
+              ),
               controller: child_name_controller,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Name ',
-                  hintText: 'Enter Name of Child'),
+                //normal border does not work so enableborder used
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                  borderSide: BorderSide(color: Colors.black87, width: 1.5),
+                ),
+                labelText: 'Name ',
+                labelStyle: TextStyle(color: Colors.black87),
+                hintText: 'Enter Name of Child',
+                hintStyle: TextStyle(color: Colors.black54),
+              ),
               validator: RequiredValidator(errorText: "* Required"),
             ),
             SizedBox(
@@ -196,9 +212,9 @@ class _SignUpFormState extends State<SignUpForm> {
                           'passwords must have at least one special character')
                 ])),
             //check box
-            SizedBox(
-              height: 20,
-            ),
+            // SizedBox(
+            //   height: 20,
+            // ),
             CheckboxListTile(
               title: const Text("Agree to terms and conditions."),
               controlAffinity: ListTileControlAffinity.leading,
@@ -212,27 +228,48 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
 
             //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-            Container(
-              height: 50,
-              width: 250,
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-              child: FlatButton(
-                onPressed: () {
-                  if (formkey.currentState!.validate()) {
-                    print("Validated");
-                    child_name = child_name_controller.text;
 
-                    print("$child_name");
-                    print("$gender");
-                  } else {
-                    print("Not Validated");
-                  }
-                },
-                child: Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              child: RaisedButton(
+                onPressed: check_box
+                    ? () {
+                        if (formkey.currentState!.validate()) {
+                          print("Validated");
+                          child_name = child_name_controller.text;
+                          phone_number = phone_number_controller.text;
+                          email = email_controller.text;
+                          password = password_controller.text;
+
+                          print("$child_name");
+                          print("$gender");
+                          print("$date_day");
+                          print("$date_month");
+                          print("$date_year");
+                          print("$phone_number");
+                          print("$email");
+                          print("$password");
+                          Navigator.of(context).pushNamed(
+                              "/sign_in"); //------------>enter routing here after login
+                        } else {
+                          print("Not Validated");
+                        }
+                      }
+                    : null,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontFamily: text1,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
+                color: option_button_colour,
               ),
             ),
           ],
