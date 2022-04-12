@@ -27,3 +27,9 @@ TextStyle textButton = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.w700,
 );
+
+TextStyle DOB_button = TextStyle(
+  color: kPrimaryColor,
+  fontSize: 16,
+  fontWeight: FontWeight.w700,
+);

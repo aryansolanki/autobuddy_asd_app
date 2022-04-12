@@ -30,18 +30,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner:
-          false, // to remove debug strip from right side up corner
+        debugShowCheckedModeBanner:
+            false, // to remove debug strip from right side up corner
 
-      home: sign_up1(),
-      // routes: {
-      //   '/': (context) => loading(),
-      //   '/option': (context) => option(),
-      //   '/wrapper': (context) => wrapper(),
-      //   '/option2': (context) => option2(),
-      //   '/sign_in': (context) => sign_in(),
-      //   '/sign_up1': (context) => sign_up1(),
-      // }
-    );
+        //home: sign_up1(),
+        routes: {
+          '/': (context) => loading(),
+          '/option': (context) => option(),
+          '/wrapper': (context) => wrapper(),
+          '/option2': (context) => option2(),
+          '/sign_in': (context) => sign_in(),
+          '/sign_up1': (context) => sign_up1(),
+        });
   }
 }

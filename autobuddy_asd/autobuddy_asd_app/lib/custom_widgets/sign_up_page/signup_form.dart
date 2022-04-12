@@ -5,6 +5,7 @@ import 'package:form_field_validator/form_field_validator.dart'; //for multi val
 
 import 'package:autobuddy_asd_app/text.dart';
 import 'package:autobuddy_asd_app/colour.dart';
+import 'package:autobuddy_asd_app/custom_widgets/sign_up_page/theme.dart';
 
 import 'package:autobuddy_asd_app/screen/sign_in.dart'; //routing
 
@@ -43,7 +44,7 @@ class _SignUpFormState extends State<SignUpForm> {
         context: context,
         initialDate: date,
         firstDate: DateTime(1970),
-        lastDate: DateTime(2030));
+        lastDate: DateTime(2023));
     if (picked != null && picked != date) {
       setState(() {
         date = picked;
@@ -61,6 +62,7 @@ class _SignUpFormState extends State<SignUpForm> {
         key: formkey,
         child: Column(
           children: <Widget>[
+            //name form feild
             TextFormField(
               style: TextStyle(
                 color: Colors.black,
@@ -86,51 +88,67 @@ class _SignUpFormState extends State<SignUpForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text('Gender?'),
+                Text(
+                  'Gender?',
+                  style: subTitle,
+                ),
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Radio(
-                  value: 'male',
-                  groupValue: gender,
-                  onChanged: (value) {
-                    setState(() {
-                      gender = value;
-                    });
-                  },
+                Transform.scale(
+                  scale: 1.4,
+                  child: Radio(
+                    value: 'male',
+                    groupValue: gender,
+                    onChanged: (value) {
+                      setState(() {
+                        gender = value;
+                      });
+                    },
+                    activeColor: Colors.blue[700],
+                  ),
                 ),
-                SizedBox(
-                  width: 10,
+                Text(
+                  "Male",
+                  style: subTitle,
                 ),
-                Text("Male"),
-                Radio(
-                  value: 'female',
-                  groupValue: gender,
-                  onChanged: (value) {
-                    setState(() {
-                      gender = value;
-                    });
-                  },
+                Transform.scale(
+                  scale: 1.4,
+                  child: Radio(
+                    value: 'female',
+                    groupValue: gender,
+                    onChanged: (value) {
+                      setState(() {
+                        gender = value;
+                      });
+                    },
+                    activeColor: Colors.pink[400],
+                  ),
                 ),
-                SizedBox(
-                  width: 10,
+                Text(
+                  "Female",
+                  style: subTitle,
                 ),
-                Text("Female"),
-                Radio(
-                  value: 'other',
-                  groupValue: gender,
-                  onChanged: (value) {
-                    setState(() {
-                      gender = value;
-                    });
-                  },
+                Transform.scale(
+                  scale: 1.4,
+                  child: Radio(
+                    value: 'other',
+                    groupValue: gender,
+                    onChanged: (value) {
+                      setState(() {
+                        gender = value;
+                      });
+                    },
+                    // activeColor: Colors.deepPurple[500],
+                    activeColor: Colors.white70,
+                  ),
                 ),
-                SizedBox(
-                  width: 10,
+                Text(
+                  "Other",
+                  style: subTitle,
                 ),
-                Text("Other"),
               ],
             ),
             //code for DOB
@@ -142,37 +160,59 @@ class _SignUpFormState extends State<SignUpForm> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Date of Birth?'),
+                    Text(
+                      'Date of Birth?',
+                      style: subTitle,
+                    ),
                     SizedBox(
                       height: 10,
                     ),
-                    Text('Your DOB is' +
-                        date_day.toString() +
-                        '/' +
-                        date_month.toString() +
-                        '/' +
-                        date_year.toString()),
+                    Text(
+                      'Your DOB is ' +
+                          date_day.toString() +
+                          '/' +
+                          date_month.toString() +
+                          '/' +
+                          date_year.toString(),
+                      style: subTitle,
+                    ),
                   ],
                 ),
                 FlatButton(
-                  child: Text("Show Time Picker"),
-                  color: Colors.blue,
+                  child: Text("Select your DOB", style: DOB_button),
+                  color: Colors.lightBlue[700],
                   textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
                   onPressed: () {
                     selectTimePicker(context);
                   },
                 ),
               ],
             ),
+            SizedBox(
+              height: 10,
+            ),
 
             //mobile number form field
             TextFormField(
+                style: TextStyle(
+                  color: Colors.black,
+                  decorationColor: Colors.black, //Font color change
+                ),
                 controller: phone_number_controller,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Phone Number',
-                    hintText: 'Enter your 10 digit phone number'),
+                  //normal border does not work so enableborder used
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    borderSide: BorderSide(color: Colors.black87, width: 1.5),
+                  ),
+                  labelText: 'Phone Number',
+                  labelStyle: TextStyle(color: Colors.black87),
+                  hintText: 'Enter your 10 digit phone number',
+                  hintStyle: TextStyle(color: Colors.black54),
+                ),
                 validator: MultiValidator([
                   RequiredValidator(errorText: "* Required"),
                   MinLengthValidator(10,
@@ -180,26 +220,54 @@ class _SignUpFormState extends State<SignUpForm> {
                   MaxLengthValidator(10,
                       errorText: "Phone number should be of 10 digit only")
                 ])),
+            SizedBox(
+              height: 10,
+            ),
 
             //email form feild
             TextFormField(
+                style: TextStyle(
+                  color: Colors.black,
+                  decorationColor: Colors.black, //Font color change
+                ),
                 controller: email_controller,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Email',
-                    hintText: 'Enter valid email id as abc@gmail.com'),
+                  //normal border does not work so enableborder used
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    borderSide: BorderSide(color: Colors.black87, width: 1.5),
+                  ),
+                  labelText: 'Email',
+                  labelStyle: TextStyle(color: Colors.black87),
+                  hintText: 'Enter valid email id as abc@gmail.com',
+                  hintStyle: TextStyle(color: Colors.black54),
+                ),
                 validator: MultiValidator([
                   RequiredValidator(errorText: "* Required"),
                   EmailValidator(errorText: "Enter valid email id"),
                 ])),
+            SizedBox(
+              height: 10,
+            ),
             //password form feild
             TextFormField(
+                style: TextStyle(
+                  color: Colors.black,
+                  decorationColor: Colors.black, //Font color change
+                ),
                 controller: password_controller,
                 obscureText: true,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password',
-                    hintText: 'Enter secure password'),
+                  //normal border does not work so enableborder used
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    borderSide: BorderSide(color: Colors.black87, width: 1.5),
+                  ),
+                  labelText: 'Password',
+                  labelStyle: TextStyle(color: Colors.black87),
+                  hintText: 'Enter secure password',
+                  hintStyle: TextStyle(color: Colors.black54),
+                ),
                 validator: MultiValidator([
                   RequiredValidator(errorText: "* Required"),
                   MinLengthValidator(6,
@@ -216,7 +284,10 @@ class _SignUpFormState extends State<SignUpForm> {
             //   height: 20,
             // ),
             CheckboxListTile(
-              title: const Text("Agree to terms and conditions."),
+              title: Text(
+                "Agree to terms and conditions.",
+                style: subTitle,
+              ),
               controlAffinity: ListTileControlAffinity.leading,
               value: check_box,
               onChanged: (value) {
@@ -269,7 +340,9 @@ class _SignUpFormState extends State<SignUpForm> {
                     ),
                   ),
                 ),
-                color: option_button_colour,
+                // color: Color(0xFF082933),
+                color: Colors.lightBlue[800],
+                // color: Color(0xFF0091EA),
               ),
             ),
           ],
