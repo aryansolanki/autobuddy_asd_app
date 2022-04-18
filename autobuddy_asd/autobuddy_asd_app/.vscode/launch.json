@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (lib\\colour.dart)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib\\colour.dart"
+        }
+    ]
+}

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:autobuddy_asd_app/text.dart';
 import 'package:autobuddy_asd_app/colour.dart';
 
+//routing
+import 'package:autobuddy_asd_app/screen/forgot_password.dart';
+
 //for basic sign in button
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
@@ -120,8 +123,11 @@ class _sign_inState extends State<sign_in> {
                                 style: ButtonStyle(),
                               ),
                               TextButton(
-                                  onPressed:
-                                      () {}, //--------------------->enter routing here
+                                  onPressed: () {
+                                    //enter any custon func if required
+                                    Navigator.of(context)
+                                        .pushNamed("/forgot_password");
+                                  }, //--------------------->enter routing here
                                   child: Text(
                                     'Forgot Password',
                                     style: TextStyle(
@@ -152,8 +158,12 @@ class _sign_inState extends State<sign_in> {
                                 backgroundColor: Colors.white,
                                 child: IconButton(
                                     color: Colors.black,
-                                    onPressed:
-                                        () {}, //--------------------->enter routing for auth with email and password here
+                                    onPressed: () {
+                                      // check details and use custom function to do all validation n all
+                                      //then only run navigator
+                                      Navigator.of(context)
+                                          .pushNamed("/dashboard");
+                                    }, //--------------------->enter routing for auth with email and password here
                                     icon: Icon(
                                       Icons.arrow_forward,
                                     )),
@@ -169,8 +179,10 @@ class _sign_inState extends State<sign_in> {
                           SignInButton(
                             Buttons.Google,
                             text: "Continue with Google",
-                            onPressed:
-                                () {}, //--------------------->enter google auth routing here
+                            onPressed: () {
+                              // use custom func to see sign in with google if true then route
+                              Navigator.of(context).pushNamed("/dashboard");
+                            }, //--------------------->enter google auth routing here
                           ),
                         ],
                       ),

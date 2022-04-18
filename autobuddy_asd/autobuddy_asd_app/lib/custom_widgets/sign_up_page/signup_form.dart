@@ -7,7 +7,7 @@ import 'package:autobuddy_asd_app/text.dart';
 import 'package:autobuddy_asd_app/colour.dart';
 import 'package:autobuddy_asd_app/custom_widgets/sign_up_page/theme.dart';
 
-import 'package:autobuddy_asd_app/screen/sign_in.dart'; //routing
+import 'package:autobuddy_asd_app/screen/dashboard.dart'; //routing
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -321,7 +321,10 @@ class _SignUpFormState extends State<SignUpForm> {
                           print("$email");
                           print("$password");
                           Navigator.of(context).pushNamed(
-                              "/sign_in"); //------------>enter routing here after login
+                              "/dashboard"); //------------>enter routing here after login
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                          //NOTE enter all custom function here to send and store and do all back end work with received data
+                          //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                         } else {
                           print("Not Validated");
                         }

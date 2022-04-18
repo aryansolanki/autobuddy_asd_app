@@ -16,7 +16,9 @@ class _wrapperState extends State<wrapper> {
         children: [
           Text('wrapper page'),
           RaisedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed("/dashboard");
+            },
             child: Text("if logged in ==>Dashboard"),
           ),
           RaisedButton(

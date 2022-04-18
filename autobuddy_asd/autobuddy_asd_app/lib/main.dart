@@ -1,4 +1,5 @@
 //basic import
+import 'package:autobuddy_asd_app/screen/forgot_password.dart';
 import 'package:flutter/material.dart';
 
 //screen and other widget import
@@ -8,6 +9,8 @@ import 'package:autobuddy_asd_app/auth/wrapper.dart';
 import 'package:autobuddy_asd_app/screen/option2.dart';
 import 'package:autobuddy_asd_app/screen/sign_in.dart';
 import 'package:autobuddy_asd_app/screen/sign_up1.dart';
+import 'package:autobuddy_asd_app/screen/dashboard.dart';
+import 'package:autobuddy_asd_app/screen/forgot_password.dart';
 
 //other service, color, text file import
 import 'package:flutter/services.dart'; //to colour status bar
@@ -41,6 +44,8 @@ class MyApp extends StatelessWidget {
           '/option2': (context) => option2(),
           '/sign_in': (context) => sign_in(),
           '/sign_up1': (context) => sign_up1(),
+          '/dashboard': (context) => dashboard(),
+          '/forgot_password': (context) => forgot_password(),
         });
   }
 }
