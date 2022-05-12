@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:autobuddy_asd_app/text.dart';
 import 'package:autobuddy_asd_app/colour.dart';
+import 'package:form_field_validator/form_field_validator.dart'; //for multi validation
 
 //routing
 import 'package:autobuddy_asd_app/screen/forgot_password.dart';
@@ -24,6 +25,15 @@ class sign_in extends StatefulWidget {
 }
 
 class _sign_inState extends State<sign_in> {
+  //global key for textform feild
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+//variable to store value
+  dynamic email;
+  dynamic password;
+//controller
+  TextEditingController email_controller = new TextEditingController();
+  TextEditingController password_controller = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -73,118 +83,167 @@ class _sign_inState extends State<sign_in> {
                           left: 35,
                           right:
                               35), //margin space for email and password field on right and left
-                      child: Column(
-                        children: [
-                          //email text field
-                          TextField(
-                            style: TextStyle(color: Colors.black),
-                            decoration: InputDecoration(
-                                fillColor: text_field_backgroundcolour,
-                                filled: true,
-                                hintText: "Email",
-                                hintStyle: TextStyle(color: hint_text_colour),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          //password text field
-                          TextField(
-                            style: TextStyle(),
-                            obscureText:
-                                true, //to get dots when password entered
-                            decoration: InputDecoration(
-                                fillColor: text_field_backgroundcolour,
-                                filled: true,
-                                hintText: "Password",
-                                hintStyle: TextStyle(color: hint_text_colour),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
-                          ),
-                          //sign up and forgot password row
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pushNamed("/sign_up1");
-                                },
-                                child: Text(
-                                  'Sign Up',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Colors.white,
-                                      fontSize: 15),
+                      child: Form(
+                        key: formkey,
+                        child: Column(
+                          children: [
+                            //email text field
+                            TextFormField(
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  decorationColor:
+                                      Colors.black, //Font color change
                                 ),
-                                style: ButtonStyle(),
-                              ),
-                              TextButton(
+                                controller: email_controller,
+                                decoration: InputDecoration(
+                                  //normal border does not work so enableborder used
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 1.5),
+                                  ),
+                                  labelText: 'Email',
+                                  labelStyle: TextStyle(color: Colors.black87),
+                                  hintText:
+                                      'Enter valid email id as abc@gmail.com',
+                                  hintStyle: TextStyle(color: Colors.black54),
+                                ),
+                                validator: MultiValidator([
+                                  RequiredValidator(errorText: "* Required"),
+                                  EmailValidator(
+                                      errorText: "Enter valid email id"),
+                                ])),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            //password text field
+                            TextFormField(
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  decorationColor:
+                                      Colors.black, //Font color change
+                                ),
+                                controller: password_controller,
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  //normal border does not work so enableborder used
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 1.5),
+                                  ),
+                                  labelText: 'Password',
+                                  labelStyle: TextStyle(color: Colors.black87),
+                                  hintText: 'Enter secure password',
+                                  hintStyle: TextStyle(color: Colors.black54),
+                                ),
+                                validator: MultiValidator([
+                                  RequiredValidator(errorText: "* Required"),
+                                  MinLengthValidator(6,
+                                      errorText:
+                                          "Password should be atleast 6 characters"),
+                                  MaxLengthValidator(15,
+                                      errorText:
+                                          "Password should not be greater than 15 characters"),
+                                  PatternValidator(r'(?=.*?[#?!@$%^&*-])',
+                                      errorText:
+                                          'passwords must have at least one special character')
+                                ])),
+                            //sign up and forgot password row
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextButton(
                                   onPressed: () {
-                                    //enter any custon func if required
                                     Navigator.of(context)
-                                        .pushNamed("/forgot_password");
-                                  }, //--------------------->enter routing here
+                                        .pushNamed("/sign_up1");
+                                  },
                                   child: Text(
-                                    'Forgot Password',
+                                    'Sign Up',
+                                    textAlign: TextAlign.left,
                                     style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  )),
-                            ],
-                          ),
-
-                          Divider(
-                            color: Colors.cyan[900],
-                            height: 0,
-                            thickness: 2,
-                          ),
-
-                          SizedBox(
-                            height: 10,
-                          ),
-
-                          //circular arrow
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              CircleAvatar(
-                                radius: 30,
-                                backgroundColor: Colors.white,
-                                child: IconButton(
-                                    color: Colors.black,
+                                        decoration: TextDecoration.underline,
+                                        color: Colors.white,
+                                        fontSize: 15),
+                                  ),
+                                  style: ButtonStyle(),
+                                ),
+                                TextButton(
                                     onPressed: () {
-                                      // check details and use custom function to do all validation n all
-                                      //then only run navigator
+                                      //enter any custon func if required
                                       Navigator.of(context)
-                                          .pushNamed("/dashboard");
-                                    }, //--------------------->enter routing for auth with email and password here
-                                    icon: Icon(
-                                      Icons.arrow_forward,
+                                          .pushNamed("/forgot_password");
+                                    }, //--------------------->enter routing here
+                                    child: Text(
+                                      'Forgot Password',
+                                      style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     )),
-                              )
-                            ],
-                          ),
+                              ],
+                            ),
 
-                          SizedBox(
-                            height: 20,
-                          ),
+                            Divider(
+                              color: Colors.cyan[900],
+                              height: 0,
+                              thickness: 2,
+                            ),
 
-                          //Google sign in
-                          SignInButton(
-                            Buttons.Google,
-                            text: "Continue with Google",
-                            onPressed: () {
-                              // use custom func to see sign in with google if true then route
-                              Navigator.of(context).pushNamed("/dashboard");
-                            }, //--------------------->enter google auth routing here
-                          ),
-                        ],
+                            SizedBox(
+                              height: 10,
+                            ),
+
+                            //circular arrow
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundColor: Colors.white,
+                                  child: IconButton(
+                                      color: Colors.black,
+                                      onPressed: () {
+                                        if (formkey.currentState!.validate()) {
+                                          print("Validated");
+
+                                          email = email_controller.text;
+                                          password = password_controller.text;
+
+                                          print("$email");
+                                          print("$password");
+                                          Navigator.of(context).pushNamed(
+                                              "/dashboard"); //------------>enter routing here after login
+                                          //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                                          //NOTE check details and use custom function to do all validation n all
+                                          //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                                        } else {
+                                          print("Not Validated");
+                                        }
+                                      },
+                                      icon: Icon(
+                                        Icons.arrow_forward,
+                                      )),
+                                )
+                              ],
+                            ),
+
+                            SizedBox(
+                              height: 20,
+                            ),
+
+                            //Google sign in
+                            SignInButton(
+                              Buttons.Google,
+                              text: "Continue with Google",
+                              onPressed: () {
+                                // use custom func to see sign in with google if true then route
+                                Navigator.of(context).pushNamed("/dashboard");
+                              }, //--------------------->enter google auth routing here
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   ],
