@@ -1,0 +1,9 @@
+in lib general files are there like colour and all
+for screens, all screen in that folder
+all custom widget of screen in custom widget folder screen name then its custom widget
+all wrapper in wrapper folder
+all auth used for wrapper in services folder
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+thus screen and custom widgets folder go hand in hand
+and services and wrapper folder go hand in hand

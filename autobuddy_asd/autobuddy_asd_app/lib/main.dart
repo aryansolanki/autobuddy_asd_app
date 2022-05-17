@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 //screen and other widget import
 import 'package:autobuddy_asd_app/screen/loading.dart';
 import 'package:autobuddy_asd_app/screen/option.dart';
-import 'package:autobuddy_asd_app/auth/wrapper.dart';
+import 'package:autobuddy_asd_app/wrapper/wrapper.dart';
 import 'package:autobuddy_asd_app/screen/option2.dart';
 import 'package:autobuddy_asd_app/screen/sign_in.dart';
 import 'package:autobuddy_asd_app/screen/sign_up1.dart';
