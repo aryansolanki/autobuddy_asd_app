@@ -1,5 +1,4 @@
 //basic import
-import 'package:autobuddy_asd_app/screen/forgot_password.dart';
 import 'package:flutter/material.dart';
 
 //screen and other widget import
