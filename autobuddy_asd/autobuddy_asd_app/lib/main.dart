@@ -10,6 +10,7 @@ import 'package:autobuddy_asd_app/screen/sign_in.dart';
 import 'package:autobuddy_asd_app/screen/sign_up1.dart';
 import 'package:autobuddy_asd_app/screen/dashboard.dart';
 import 'package:autobuddy_asd_app/screen/forgot_password.dart';
+import 'package:autobuddy_asd_app/services/auth.dart';
 
 //other service, color, text file import
 import 'package:flutter/services.dart'; //to colour status bar
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner:
             false, // to remove debug strip from right side up corner
 
-        //home: sign_up1(),
+        //home: AuthService(),
         routes: {
           '/': (context) => loading(),
           '/option': (context) => option(),
