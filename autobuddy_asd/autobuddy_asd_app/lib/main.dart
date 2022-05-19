@@ -16,12 +16,17 @@ import 'package:autobuddy_asd_app/services/auth.dart';
 import 'package:flutter/services.dart'; //to colour status bar
 import 'package:autobuddy_asd_app/colour.dart';
 
+// Import the firebase_core plugin
+import 'package:firebase_core/firebase_core.dart';
+
 void main() {
 //code for status bar colour
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: status_bar_colour,
     statusBarIconBrightness: Brightness.light,
   ));
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
 
   runApp(const MyApp());
 }

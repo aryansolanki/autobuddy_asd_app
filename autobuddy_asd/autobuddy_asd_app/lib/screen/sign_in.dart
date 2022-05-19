@@ -6,6 +6,7 @@ import 'package:form_field_validator/form_field_validator.dart'; //for multi val
 
 //routing
 import 'package:autobuddy_asd_app/screen/forgot_password.dart';
+import 'package:autobuddy_asd_app/services/auth.dart';
 
 //for basic sign in button
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -33,6 +34,10 @@ class _sign_inState extends State<sign_in> {
 //controller
   TextEditingController email_controller = new TextEditingController();
   TextEditingController password_controller = new TextEditingController();
+
+  //instance of auth
+  final AuthService _auth =
+      AuthService(); // underscore to keep this variable to this file only
 
   @override
   Widget build(BuildContext context) {
@@ -241,6 +246,39 @@ class _sign_inState extends State<sign_in> {
                                 // use custom func to see sign in with google if true then route
                                 Navigator.of(context).pushNamed("/dashboard");
                               }, //--------------------->enter google auth routing here
+                            ),
+                            //Anonymous sign in
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 70),
+                              child: RaisedButton(
+                                // use custom func to see sign in with google if true then route
+                                onPressed: () async {
+                                  dynamic result = await _auth.signInAnon();
+                                  if (result == null) {
+                                    print('error signing in');
+                                  } else {
+                                    print('signed in');
+                                    print(result.uid);
+                                  }
+                                }, //--------------------->enter anon auth routing here
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.account_circle_outlined),
+                                    Container(
+                                      padding: EdgeInsets.all(10.0),
+                                      child: Text(
+                                        'Sign In as Guest',
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          fontFamily: text1,
+                                          color: Colors.grey[600],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                color: Colors.white,
+                              ),
                             ),
                           ],
                         ),
