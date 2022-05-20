@@ -22,7 +22,7 @@ class _dashboardState extends State<dashboard> {
           Text('dashboard'),
           RaisedButton(
             onPressed: () {},
-            child: Text("Dashboard"),
+            child: Text("Logout"),
           ),
         ],
       ),

@@ -16,17 +16,31 @@ import 'package:autobuddy_asd_app/services/auth.dart';
 import 'package:flutter/services.dart'; //to colour status bar
 import 'package:autobuddy_asd_app/colour.dart';
 
+//import of custom model
+import 'package:autobuddy_asd_app/services/model/custom_user.dart';
+
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+//Import for Provider
+import 'package:provider/provider.dart';
+
+void main() async {
 //code for status bar colour
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: status_bar_colour,
     statusBarIconBrightness: Brightness.light,
   ));
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp(
+    //options: DefaultFirebaseOptions.currentPlatform,
+    options: FirebaseOptions(
+      apiKey: "AIzaSyD81arbNhCR23Cb0Qj6AvBowFAEaL-VlK4",
+      appId: "1:639736626355:android:e140efee9c959ff6f884c6",
+      messagingSenderId: "XXX",
+      projectId: "autobuddys-app",
+    ),
+  );
 
   runApp(const MyApp());
 }
@@ -37,20 +51,24 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner:
-            false, // to remove debug strip from right side up corner
+    return StreamProvider<custom_user>.value(
+      value: AuthService().user,
+      initialData: custom_user(uid: null),
+      child: MaterialApp(
+          debugShowCheckedModeBanner:
+              false, // to remove debug strip from right side up corner
 
-        //home: AuthService(),
-        routes: {
-          '/': (context) => loading(),
-          '/option': (context) => option(),
-          '/wrapper': (context) => wrapper(),
-          '/option2': (context) => option2(),
-          '/sign_in': (context) => sign_in(),
-          '/sign_up1': (context) => sign_up1(),
-          '/dashboard': (context) => dashboard(),
-          '/forgot_password': (context) => forgot_password(),
-        });
+          //home: AuthService(),
+          routes: {
+            '/': (context) => loading(),
+            '/option': (context) => option(),
+            '/wrapper': (context) => wrapper(),
+            '/option2': (context) => option2(),
+            '/sign_in': (context) => sign_in(),
+            '/sign_up1': (context) => sign_up1(),
+            '/dashboard': (context) => dashboard(),
+            '/forgot_password': (context) => forgot_password(),
+          }),
+    );
   }
 }

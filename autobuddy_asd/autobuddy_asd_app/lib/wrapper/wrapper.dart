@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:autobuddy_asd_app/screen/option2.dart';
+//Import for Provider
+import 'package:provider/provider.dart';
+//import of custom model
+import 'package:autobuddy_asd_app/services/model/custom_user.dart';
 
 class wrapper extends StatefulWidget {
   const wrapper({Key? key}) : super(key: key);
@@ -11,6 +15,8 @@ class wrapper extends StatefulWidget {
 class _wrapperState extends State<wrapper> {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<custom_user>(context);
+    print(user);
     return Container(
       child: Column(
         children: [
