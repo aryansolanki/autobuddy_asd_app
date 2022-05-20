@@ -259,6 +259,7 @@ class _sign_inState extends State<sign_in> {
                                   } else {
                                     print('signed in');
                                     print(result.uid);
+                                    Navigator.pop(context);
                                   }
                                 }, //--------------------->enter anon auth routing here
                                 child: Row(

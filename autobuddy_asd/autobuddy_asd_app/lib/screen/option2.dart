@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:autobuddy_asd_app/colour.dart';
 import 'package:autobuddy_asd_app/text.dart';
 
+import 'package:autobuddy_asd_app/screen/sign_in.dart';
+
 class option2 extends StatefulWidget {
   const option2({Key? key}) : super(key: key);
 
@@ -29,6 +31,7 @@ class _option2State extends State<option2> {
                 padding: EdgeInsets.symmetric(horizontal: 50),
                 child: RaisedButton(
                   onPressed: () {
+                    //sign_in();
                     Navigator.of(context).pushNamed("/sign_in");
                   },
                   shape: RoundedRectangleBorder(
