@@ -6,6 +6,8 @@ import 'package:autobuddy_asd_app/custom_widgets/sign_up_page/theme.dart';
 import 'package:autobuddy_asd_app/colour.dart';
 import 'package:autobuddy_asd_app/text.dart';
 
+import 'package:autobuddy_asd_app/services/auth.dart';
+
 class sign_up1 extends StatefulWidget {
   const sign_up1({Key? key}) : super(key: key);
 
@@ -14,6 +16,10 @@ class sign_up1 extends StatefulWidget {
 }
 
 class _sign_up1State extends State<sign_up1> {
+  //instance of auth
+  final AuthService _auth =
+      AuthService(); // underscore to keep this variable to this file only
+
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -9,6 +9,8 @@ import 'package:autobuddy_asd_app/custom_widgets/sign_up_page/theme.dart';
 
 import 'package:autobuddy_asd_app/screen/dashboard.dart'; //routing
 
+import 'package:autobuddy_asd_app/services/auth.dart';
+
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
 
@@ -56,6 +58,12 @@ class _SignUpFormState extends State<SignUpForm> {
     }
   }
 
+  //to save error if occure while auth
+  String error = '';
+
+  //instance of auth
+  final AuthService _auth =
+      AuthService(); // underscore to keep this variable to this file only
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -304,13 +312,24 @@ class _SignUpFormState extends State<SignUpForm> {
               padding: EdgeInsets.symmetric(horizontal: 50),
               child: RaisedButton(
                 onPressed: check_box
-                    ? () {
+                    ? () async {
                         if (formkey.currentState!.validate()) {
                           print("Validated");
                           child_name = child_name_controller.text;
                           phone_number = phone_number_controller.text;
                           email = email_controller.text;
                           password = password_controller.text;
+                          //for sign in with email n password
+                          dynamic result = await _auth
+                              .registerWithEmailAndPassword(email, password);
+
+                          if (result == null) {
+                            setState(() {
+                              error = 'Please supply a valid Credentials';
+                            });
+                          } else {
+                            Navigator.pop(context);
+                          }
 
                           print("$child_name");
                           print("$gender");
@@ -320,8 +339,8 @@ class _SignUpFormState extends State<SignUpForm> {
                           print("$phone_number");
                           print("$email");
                           print("$password");
-                          Navigator.of(context).pushNamed(
-                              "/dashboard"); //------------>enter routing here after login
+
+                          //Navigator.of(context).pushNamed("/dashboard"); //------------>enter routing here after login
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                           //NOTE enter all custom function here to send and store and do all back end work with received data
                           //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -348,6 +367,12 @@ class _SignUpFormState extends State<SignUpForm> {
                 // color: Color(0xFF0091EA),
               ),
             ),
+
+            SizedBox(height: 12.0),
+            Text(
+              error,
+              style: TextStyle(color: Colors.red, fontSize: 14.0),
+            )
           ],
         ));
   }
