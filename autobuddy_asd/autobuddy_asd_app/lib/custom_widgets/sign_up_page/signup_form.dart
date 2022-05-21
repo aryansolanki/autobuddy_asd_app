@@ -345,7 +345,7 @@ class _SignUpFormState extends State<SignUpForm> {
                           //NOTE enter all custom function here to send and store and do all back end work with received data
                           //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                         } else {
-                          print("Not Validated");
+                          print("Not Validated"); //front end validation failed
                         }
                       }
                     : null,
@@ -371,7 +371,7 @@ class _SignUpFormState extends State<SignUpForm> {
             SizedBox(height: 12.0),
             Text(
               error,
-              style: TextStyle(color: Colors.red, fontSize: 14.0),
+              style: TextStyle(color: Colors.black, fontSize: 14.0),
             )
           ],
         ));

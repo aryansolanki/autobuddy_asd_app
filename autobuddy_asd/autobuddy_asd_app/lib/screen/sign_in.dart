@@ -35,6 +35,9 @@ class _sign_inState extends State<sign_in> {
   TextEditingController email_controller = new TextEditingController();
   TextEditingController password_controller = new TextEditingController();
 
+  //to save error if occure while auth
+  String error = '';
+
   //instance of auth
   final AuthService _auth =
       AuthService(); // underscore to keep this variable to this file only
@@ -209,7 +212,7 @@ class _sign_inState extends State<sign_in> {
                                   backgroundColor: Colors.white,
                                   child: IconButton(
                                       color: Colors.black,
-                                      onPressed: () {
+                                      onPressed: () async {
                                         if (formkey.currentState!.validate()) {
                                           print("Validated");
 
@@ -218,8 +221,19 @@ class _sign_inState extends State<sign_in> {
 
                                           print("$email");
                                           print("$password");
-                                          Navigator.of(context).pushNamed(
-                                              "/dashboard"); //------------>enter routing here after login
+                                          dynamic result = await _auth
+                                              .signInWithEmailAndPassword(
+                                                  email, password);
+                                          if (result == null) {
+                                            setState(() {
+                                              error =
+                                                  'Could not Sign In please try again';
+                                            });
+                                          } else {
+                                            Navigator.pop(context);
+                                          }
+
+                                          //Navigator.of(context).pushNamed("/dashboard"); //------------>enter routing here after login
                                           //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                                           //NOTE check details and use custom function to do all validation n all
                                           //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -232,6 +246,12 @@ class _sign_inState extends State<sign_in> {
                                       )),
                                 )
                               ],
+                            ),
+
+                            Text(
+                              error,
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 14.0),
                             ),
 
                             SizedBox(

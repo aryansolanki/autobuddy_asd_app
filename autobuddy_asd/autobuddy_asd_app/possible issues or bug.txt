@@ -1,0 +1,5 @@
+I1)when user goes to login then register then login many times , page keeps on piling on due to navigator push so handle that 
+Soln1)routing of login to register and register to login keep pop then other page push instead of just push
+
+I2)
+Soln2)

@@ -7,3 +7,6 @@ all auth used for wrapper in services folder
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 thus screen and custom widgets folder go hand in hand
 and services and wrapper folder go hand in hand
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Note all auth for register with email and password in signup_form.dart
