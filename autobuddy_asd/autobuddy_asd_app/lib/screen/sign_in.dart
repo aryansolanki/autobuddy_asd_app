@@ -11,6 +11,9 @@ import 'package:autobuddy_asd_app/services/auth.dart';
 //for basic sign in button
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
+//loading widget
+import 'package:autobuddy_asd_app/custom_widgets/mid_screen_loading.dart';
+
 //NOTE:- in this page first container present for background pic
 //on that scaffold with all widget tree.
 // scaffold has stack with 2 children
@@ -42,276 +45,308 @@ class _sign_inState extends State<sign_in> {
   final AuthService _auth =
       AuthService(); // underscore to keep this variable to this file only
 
+  //for checking when to show loading widget
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // scaffold does not have background image property so used container
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/background1.png'),
-            fit: BoxFit.cover), //fit to resize image and cover full screen
-      ),
-      child: Scaffold(
-        backgroundColor: Colors
-            .transparent, //default colour is white which will hide background pic so set it as transparent
-        body: Stack(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: EdgeInsets.only(left: 35, top: 130),
-                  child: Text(
-                    'Welcome Back !!',
-                    style: TextStyle(
-                        color: Colors.white, fontFamily: text2, fontSize: 53),
-                  ),
-                ),
-              ],
+    return loading
+        ? Loading()
+        : Container(
+            // scaffold does not have background image property so used container
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/background1.png'),
+                  fit:
+                      BoxFit.cover), //fit to resize image and cover full screen
             ),
-            SingleChildScrollView(
-              // when we type and keyboard comes then widget need to be pushed up
-              //if no space is available then error comes as widget cannot move and less space for keyboard
-              //so to make widget that can be scrolled we use SingleChildScrollView
-              //entire widget tree under this widget is scrollable
-              child: Container(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.4),
-                //MediaQuery.of(context).size.height gives total height of screen
-                // in end  *0.4 means to take 4/10th of space
-                //and that value is given to padding which is controlling
-                //from where rest of widget tree starts from top
-
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      // full page except welcome back in  this container
-                      margin: EdgeInsets.only(
-                          left: 35,
-                          right:
-                              35), //margin space for email and password field on right and left
-                      child: Form(
-                        key: formkey,
-                        child: Column(
-                          children: [
-                            //email text field
-                            TextFormField(
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  decorationColor:
-                                      Colors.black, //Font color change
-                                ),
-                                controller: email_controller,
-                                decoration: InputDecoration(
-                                  //normal border does not work so enableborder used
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    borderSide: BorderSide(
-                                        color: Colors.black87, width: 1.5),
-                                  ),
-                                  labelText: 'Email',
-                                  labelStyle: TextStyle(color: Colors.black87),
-                                  hintText:
-                                      'Enter valid email id as abc@gmail.com',
-                                  hintStyle: TextStyle(color: Colors.black54),
-                                ),
-                                validator: MultiValidator([
-                                  RequiredValidator(errorText: "* Required"),
-                                  EmailValidator(
-                                      errorText: "Enter valid email id"),
-                                ])),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            //password text field
-                            TextFormField(
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  decorationColor:
-                                      Colors.black, //Font color change
-                                ),
-                                controller: password_controller,
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  //normal border does not work so enableborder used
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    borderSide: BorderSide(
-                                        color: Colors.black87, width: 1.5),
-                                  ),
-                                  labelText: 'Password',
-                                  labelStyle: TextStyle(color: Colors.black87),
-                                  hintText: 'Enter secure password',
-                                  hintStyle: TextStyle(color: Colors.black54),
-                                ),
-                                validator: MultiValidator([
-                                  RequiredValidator(errorText: "* Required"),
-                                  MinLengthValidator(6,
-                                      errorText:
-                                          "Password should be atleast 6 characters"),
-                                  MaxLengthValidator(15,
-                                      errorText:
-                                          "Password should not be greater than 15 characters"),
-                                  PatternValidator(r'(?=.*?[#?!@$%^&*-])',
-                                      errorText:
-                                          'passwords must have at least one special character')
-                                ])),
-                            //sign up and forgot password row
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context)
-                                        .pushNamed("/sign_up1");
-                                  },
-                                  child: Text(
-                                    'Sign Up',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        color: Colors.white,
-                                        fontSize: 15),
-                                  ),
-                                  style: ButtonStyle(),
-                                ),
-                                TextButton(
-                                    onPressed: () {
-                                      //enter any custon func if required
-                                      Navigator.of(context)
-                                          .pushNamed("/forgot_password");
-                                    }, //--------------------->enter routing here
-                                    child: Text(
-                                      'Forgot Password',
-                                      style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                      ),
-                                    )),
-                              ],
-                            ),
-
-                            Divider(
-                              color: Colors.cyan[900],
-                              height: 0,
-                              thickness: 2,
-                            ),
-
-                            SizedBox(
-                              height: 10,
-                            ),
-
-                            //circular arrow
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                CircleAvatar(
-                                  radius: 30,
-                                  backgroundColor: Colors.white,
-                                  child: IconButton(
-                                      color: Colors.black,
-                                      onPressed: () async {
-                                        if (formkey.currentState!.validate()) {
-                                          print("Validated");
-
-                                          email = email_controller.text;
-                                          password = password_controller.text;
-
-                                          print("$email");
-                                          print("$password");
-                                          dynamic result = await _auth
-                                              .signInWithEmailAndPassword(
-                                                  email, password);
-                                          if (result == null) {
-                                            setState(() {
-                                              error =
-                                                  'Could not Sign In please try again';
-                                            });
-                                          } else {
-                                            Navigator.pop(context);
-                                          }
-
-                                          //Navigator.of(context).pushNamed("/dashboard"); //------------>enter routing here after login
-                                          //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                                          //NOTE check details and use custom function to do all validation n all
-                                          //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                                        } else {
-                                          print("Not Validated");
-                                        }
-                                      },
-                                      icon: Icon(
-                                        Icons.arrow_forward,
-                                      )),
-                                )
-                              ],
-                            ),
-
-                            Text(
-                              error,
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 14.0),
-                            ),
-
-                            SizedBox(
-                              height: 20,
-                            ),
-
-                            //Google sign in
-                            SignInButton(
-                              Buttons.Google,
-                              text: "Continue with Google",
-                              onPressed: () {
-                                // use custom func to see sign in with google if true then route
-                                Navigator.of(context).pushNamed("/dashboard");
-                              }, //--------------------->enter google auth routing here
-                            ),
-                            //Anonymous sign in
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 70),
-                              child: RaisedButton(
-                                // use custom func to see sign in with google if true then route
-                                onPressed: () async {
-                                  dynamic result = await _auth.signInAnon();
-                                  if (result == null) {
-                                    print('error signing in');
-                                  } else {
-                                    print('signed in');
-                                    print(result.uid);
-                                    Navigator.pop(context);
-                                  }
-                                }, //--------------------->enter anon auth routing here
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.account_circle_outlined),
-                                    Container(
-                                      padding: EdgeInsets.all(10.0),
-                                      child: Text(
-                                        'Sign In as Guest',
-                                        style: TextStyle(
-                                          fontSize: 15.0,
-                                          fontFamily: text1,
-                                          color: Colors.grey[600],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
+            child: Scaffold(
+              backgroundColor: Colors
+                  .transparent, //default colour is white which will hide background pic so set it as transparent
+              body: Stack(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(left: 35, top: 130),
+                        child: Text(
+                          'Welcome Back !!',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: text2,
+                              fontSize: 53),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                    ],
+                  ),
+                  SingleChildScrollView(
+                    // when we type and keyboard comes then widget need to be pushed up
+                    //if no space is available then error comes as widget cannot move and less space for keyboard
+                    //so to make widget that can be scrolled we use SingleChildScrollView
+                    //entire widget tree under this widget is scrollable
+                    child: Container(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.4),
+                      //MediaQuery.of(context).size.height gives total height of screen
+                      // in end  *0.4 means to take 4/10th of space
+                      //and that value is given to padding which is controlling
+                      //from where rest of widget tree starts from top
+
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            // full page except welcome back in  this container
+                            margin: EdgeInsets.only(
+                                left: 35,
+                                right:
+                                    35), //margin space for email and password field on right and left
+                            child: Form(
+                              key: formkey,
+                              child: Column(
+                                children: [
+                                  //email text field
+                                  TextFormField(
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        decorationColor:
+                                            Colors.black, //Font color change
+                                      ),
+                                      controller: email_controller,
+                                      decoration: InputDecoration(
+                                        //normal border does not work so enableborder used
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                          borderSide: BorderSide(
+                                              color: Colors.black87,
+                                              width: 1.5),
+                                        ),
+                                        labelText: 'Email',
+                                        labelStyle:
+                                            TextStyle(color: Colors.black87),
+                                        hintText:
+                                            'Enter valid email id as abc@gmail.com',
+                                        hintStyle:
+                                            TextStyle(color: Colors.black54),
+                                      ),
+                                      validator: MultiValidator([
+                                        RequiredValidator(
+                                            errorText: "* Required"),
+                                        EmailValidator(
+                                            errorText: "Enter valid email id"),
+                                      ])),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  //password text field
+                                  TextFormField(
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        decorationColor:
+                                            Colors.black, //Font color change
+                                      ),
+                                      controller: password_controller,
+                                      obscureText: true,
+                                      decoration: InputDecoration(
+                                        //normal border does not work so enableborder used
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                          borderSide: BorderSide(
+                                              color: Colors.black87,
+                                              width: 1.5),
+                                        ),
+                                        labelText: 'Password',
+                                        labelStyle:
+                                            TextStyle(color: Colors.black87),
+                                        hintText: 'Enter secure password',
+                                        hintStyle:
+                                            TextStyle(color: Colors.black54),
+                                      ),
+                                      validator: MultiValidator([
+                                        RequiredValidator(
+                                            errorText: "* Required"),
+                                        MinLengthValidator(6,
+                                            errorText:
+                                                "Password should be atleast 6 characters"),
+                                        MaxLengthValidator(15,
+                                            errorText:
+                                                "Password should not be greater than 15 characters"),
+                                        PatternValidator(r'(?=.*?[#?!@$%^&*-])',
+                                            errorText:
+                                                'passwords must have at least one special character')
+                                      ])),
+                                  //sign up and forgot password row
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context)
+                                              .pushNamed("/sign_up1");
+                                        },
+                                        child: Text(
+                                          'Sign Up',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              color: Colors.white,
+                                              fontSize: 15),
+                                        ),
+                                        style: ButtonStyle(),
+                                      ),
+                                      TextButton(
+                                          onPressed: () {
+                                            //enter any custon func if required
+                                            Navigator.of(context)
+                                                .pushNamed("/forgot_password");
+                                          }, //--------------------->enter routing here
+                                          child: Text(
+                                            'Forgot Password',
+                                            style: TextStyle(
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                            ),
+                                          )),
+                                    ],
+                                  ),
+
+                                  Divider(
+                                    color: Colors.cyan[900],
+                                    height: 0,
+                                    thickness: 2,
+                                  ),
+
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+
+                                  //circular arrow
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 30,
+                                        backgroundColor: Colors.white,
+                                        child: IconButton(
+                                            color: Colors.black,
+                                            onPressed: () async {
+                                              if (formkey.currentState!
+                                                  .validate()) {
+                                                print("Validated");
+
+                                                email = email_controller.text;
+                                                password =
+                                                    password_controller.text;
+
+                                                print("$email");
+                                                print("$password");
+                                                setState(() => loading =
+                                                    true); //for loading widget
+                                                dynamic result = await _auth
+                                                    .signInWithEmailAndPassword(
+                                                        email, password);
+                                                setState(() => loading =
+                                                    false); //for loading widget
+                                                if (result == null) {
+                                                  setState(() {
+                                                    error =
+                                                        'Could not Sign In please try again';
+                                                  });
+                                                } else {
+                                                  Navigator.pop(context);
+                                                }
+
+                                                //Navigator.of(context).pushNamed("/dashboard"); //------------>enter routing here after login
+                                                //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                                                //NOTE check details and use custom function to do all validation n all
+                                                //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                                              } else {
+                                                print("Not Validated");
+                                              }
+                                            },
+                                            icon: Icon(
+                                              Icons.arrow_forward,
+                                            )),
+                                      )
+                                    ],
+                                  ),
+
+                                  Text(
+                                    error,
+                                    style: TextStyle(
+                                        color: error_colour, fontSize: 14.0),
+                                  ),
+
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+
+                                  //Google sign in
+                                  SignInButton(
+                                    Buttons.Google,
+                                    text: "Continue with Google",
+                                    onPressed: () {
+                                      // use custom func to see sign in with google if true then route
+                                      Navigator.of(context)
+                                          .pushNamed("/dashboard");
+                                    }, //--------------------->enter google auth routing here
+                                  ),
+                                  //Anonymous sign in
+                                  Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 70),
+                                    child: RaisedButton(
+                                      // use custom func to see sign in with google if true then route
+                                      onPressed: () async {
+                                        setState(() => loading = true);
+                                        dynamic result =
+                                            await _auth.signInAnon();
+                                        setState(() => loading = false);
+                                        if (result == null) {
+                                          print('error signing in');
+                                        } else {
+                                          print('signed in');
+                                          print(result.uid);
+                                          Navigator.pop(context);
+                                        }
+                                      }, //--------------------->enter anon auth routing here
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.account_circle_outlined),
+                                          Container(
+                                            padding: EdgeInsets.all(10.0),
+                                            child: Text(
+                                              'Sign In as Guest',
+                                              style: TextStyle(
+                                                fontSize: 15.0,
+                                                fontFamily: text1,
+                                                color: Colors.grey[600],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 }
