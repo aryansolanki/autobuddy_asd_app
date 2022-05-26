@@ -1,0 +1,4 @@
+new names given
+
+brewCollection ====> autobuddys_asd_collection    //reference name
+brews  ====> asd_users_record   //database name
