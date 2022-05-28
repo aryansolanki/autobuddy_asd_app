@@ -1,4 +1,11 @@
+refer to vid18 part2 for seeing all data and accessing it
+
+
+
+
 new names given
 
 brewCollection ====> autobuddys_asd_collection    //reference name
 brews  ====> asd_users_record   //database name
+brew.dart ====>custom_database_model.dart
+ _brewListFromSnapshot ====> _custom_database_model_from_snapshot

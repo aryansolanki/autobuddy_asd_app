@@ -1,5 +1,6 @@
 //import of plugin we require
 import 'package:autobuddy_asd_app/services/model/custom_user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 //import of databaseservice.dart that we created
@@ -69,8 +70,24 @@ class AuthService {
         null,
         null,
         null,
-        null,
-      ); // we have kept starting value as null
+      );
+      // we have kept starting value as null
+
+      print(user?.uid);
+      user_uid = user?.uid;
+
+      // final docRef = FirebaseFirestore.instance
+      //     .collection("asd_users_record")
+      //     .doc(user?.uid);
+      // docRef.get().then(
+      //   (DocumentSnapshot doc) {
+      //     //final data = doc.data() as Map<dynamic, dynamic>;
+      //     print(doc.data());
+      //     // ...
+      //   },
+      //   onError: (e) => print("Error getting document: $e"),
+      // );
+
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());
@@ -88,3 +105,6 @@ class AuthService {
     }
   }
 }
+
+//variable to store user uid
+dynamic user_uid;

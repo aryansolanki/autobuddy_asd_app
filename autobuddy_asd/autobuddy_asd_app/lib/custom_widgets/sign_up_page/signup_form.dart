@@ -14,6 +14,9 @@ import 'package:autobuddy_asd_app/services/auth.dart';
 //loading widget
 import 'package:autobuddy_asd_app/custom_widgets/mid_screen_loading.dart';
 
+//custom function to update and read database
+import 'package:autobuddy_asd_app/services/query.dart';
+
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
 
@@ -344,6 +347,19 @@ class _SignUpFormState extends State<SignUpForm> {
                                   error = 'Please supply a valid Credentials';
                                 });
                               } else {
+                                await update_data(user_uid, 'Name', child_name);
+                                await update_data(user_uid, 'Gender', gender);
+                                await update_data(
+                                    user_uid, 'Date of birth', date_day);
+                                await update_data(
+                                    user_uid, 'Month of birth', date_month);
+                                await update_data(
+                                    user_uid, 'Year of birth', date_year);
+                                await update_data(
+                                    user_uid, 'Contact number', phone_number);
+                                await update_data(user_uid, 'E-mail ID', email);
+                                await update_data(
+                                    user_uid, 'Password', password);
                                 Navigator.pop(context);
                               }
 
