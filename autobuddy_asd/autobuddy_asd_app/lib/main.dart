@@ -11,6 +11,9 @@ import 'package:autobuddy_asd_app/screen/sign_up1.dart';
 import 'package:autobuddy_asd_app/screen/dashboard.dart';
 import 'package:autobuddy_asd_app/screen/forgot_password.dart';
 import 'package:autobuddy_asd_app/services/auth.dart';
+import 'package:autobuddy_asd_app/screen/profile.dart';
+import 'package:autobuddy_asd_app/screen/progress.dart';
+import 'package:autobuddy_asd_app/screen/setting.dart';
 
 //other service, color, text file import
 import 'package:flutter/services.dart'; //to colour status bar
@@ -68,6 +71,9 @@ class MyApp extends StatelessWidget {
             '/sign_up1': (context) => sign_up1(),
             '/dashboard': (context) => dashboard(),
             '/forgot_password': (context) => forgot_password(),
+            '/profile': (context) => profile(),
+            '/progress': (context) => progress(),
+            '/setting': (context) => setting(),
           }),
     );
   }
