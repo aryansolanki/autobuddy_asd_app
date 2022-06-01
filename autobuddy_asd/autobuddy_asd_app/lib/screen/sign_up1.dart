@@ -26,7 +26,7 @@ class _sign_up1State extends State<sign_up1> {
       // scaffold does not have background image property so used container
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('assets/background1.png'),
+            image: AssetImage('assets/sign_up.png'),
             fit: BoxFit.cover), //fit to resize image and cover full screen
       ),
       child: Scaffold(

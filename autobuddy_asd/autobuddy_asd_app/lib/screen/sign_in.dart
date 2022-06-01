@@ -56,7 +56,7 @@ class _sign_inState extends State<sign_in> {
             // scaffold does not have background image property so used container
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('assets/background1.png'),
+                  image: AssetImage('assets/log_in.png'),
                   fit:
                       BoxFit.cover), //fit to resize image and cover full screen
             ),
