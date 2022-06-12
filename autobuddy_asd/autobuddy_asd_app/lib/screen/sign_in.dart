@@ -185,6 +185,7 @@ class _sign_inState extends State<sign_in> {
                                     children: [
                                       TextButton(
                                         onPressed: () {
+                                          Navigator.pop(context);
                                           Navigator.of(context)
                                               .pushNamed("/sign_up1");
                                         },

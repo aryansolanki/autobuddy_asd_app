@@ -14,6 +14,7 @@ import 'package:autobuddy_asd_app/services/auth.dart';
 import 'package:autobuddy_asd_app/screen/profile.dart';
 import 'package:autobuddy_asd_app/screen/progress.dart';
 import 'package:autobuddy_asd_app/screen/setting.dart';
+import 'package:autobuddy_asd_app/game_1/main_game.dart';
 
 //other service, color, text file import
 import 'package:flutter/services.dart'; //to colour status bar
@@ -74,6 +75,7 @@ class MyApp extends StatelessWidget {
             '/profile': (context) => profile(),
             '/progress': (context) => progress(),
             '/setting': (context) => setting(),
+            '/Game_1': (context) => Game_1(),
           }),
     );
   }

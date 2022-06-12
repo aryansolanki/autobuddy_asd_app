@@ -59,6 +59,7 @@ class _sign_up1State extends State<sign_up1> {
                     ),
                     GestureDetector(
                       onTap: () {
+                        Navigator.pop(context);
                         Navigator.of(context).pushNamed("/sign_in");
                       },
                       child: Text(

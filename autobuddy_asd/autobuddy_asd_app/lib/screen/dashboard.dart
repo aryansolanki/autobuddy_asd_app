@@ -27,6 +27,9 @@ import 'package:autobuddy_asd_app/screen/setting.dart';
 //import for decoration
 import 'package:autobuddy_asd_app/text.dart';
 
+//game1 routing
+import 'package:autobuddy_asd_app/game_1/main_game.dart';
+
 class dashboard extends StatefulWidget {
   const dashboard({Key? key}) : super(key: key);
 
@@ -102,7 +105,10 @@ class _dashboardState extends State<dashboard> {
             ),
             GestureDetector(
               onTap: () {
-                print("game clicked"); //==========> enter game routing here
+                Navigator.of(context).pushNamed("/Game_1");
+                print('game clicked');
+
+                //==========> enter game routing here
               },
               child: Container(
                 height: 200.0,
@@ -119,7 +125,6 @@ class _dashboardState extends State<dashboard> {
             SizedBox(
               height: 20.0,
             ),
-            Text('dashboard'),
             RaisedButton(
               onPressed: () async {
                 print(read_data(user_uid));

@@ -1,3 +1,4 @@
 work to be done:-
 1)forgot password page
 2)when google sign in complete add loading widget there before and after await
+3)setting page
