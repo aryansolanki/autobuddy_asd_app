@@ -33,3 +33,10 @@ TextStyle DOB_button = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w700,
 );
+
+TextStyle graph_heading = TextStyle(
+    decoration: TextDecoration.underline,
+    decorationStyle: TextDecorationStyle.dashed,
+    color: kSecondaryColor,
+    fontSize: 18,
+    fontWeight: FontWeight.w500);

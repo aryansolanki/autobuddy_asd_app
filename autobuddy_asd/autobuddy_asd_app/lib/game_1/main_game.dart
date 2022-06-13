@@ -136,7 +136,7 @@ class _Game_1State extends State<Game_1> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.amber,
+            backgroundColor: Colors.white,
             appBar: AppBar(
               centerTitle: true,
               title: Text('Matching Game'),
