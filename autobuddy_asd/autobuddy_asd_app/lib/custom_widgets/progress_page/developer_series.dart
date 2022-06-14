@@ -2,8 +2,8 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/foundation.dart';
 
 class DeveloperSeries {
-  final num year;
-  final int developers;
+  final DateTime year;
+  final num developers;
   final charts.Color barColor;
 
   DeveloperSeries(

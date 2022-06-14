@@ -9,6 +9,8 @@ import 'package:autobuddy_asd_app/services/query.dart';
 import 'package:autobuddy_asd_app/services/auth.dart';
 //plugin
 import 'package:charts_flutter/flutter.dart' as charts;
+// for date
+import 'package:intl/intl.dart';
 
 class progress extends StatefulWidget {
   const progress({Key? key}) : super(key: key);
@@ -18,6 +20,8 @@ class progress extends StatefulWidget {
 }
 
 class _progressState extends State<progress> {
+  late List<DeveloperSeries> _data = [];
+
   //for dropdown menu for game selection
   var selection_of_game = [
     'Auti Spark',
@@ -30,7 +34,7 @@ class _progressState extends State<progress> {
     'Past 3 Month',
     'Past 6 Month',
     'Past 1 Year',
-    'Past 3 Years'
+    'From Beginning'
   ];
   String selectedItem1 = 'Past 1 Month';
 
@@ -40,6 +44,8 @@ class _progressState extends State<progress> {
 
   //to get data
   performance_data() async {
+    final List<DeveloperSeries> data = [];
+    List temp1 = []; //to save date and get unique date
     List all_data = await read_collection(user_uid);
     int length_of_all_data = all_data.length;
     // print(all_data[0]['Level']);
@@ -47,68 +53,136 @@ class _progressState extends State<progress> {
       if (selectedItem == 'Auti Spark' && all_data[i]['Game ID'] == 1) {
         //only if game is auti spark if want for some other game use other if condition
         if (selectedItem2 == all_data[i]['Level'].toString()) {
+          temp1.add(all_data[i]['Date']);
+          print(temp1);
           print(all_data[i]);
         }
       }
     }
+    var temp2 = (temp1.toSet()).toList(); //list without repeated value
+    // print(temp2);
+
+    //list with x and y axis value just make it ascending
+    List temp3 = [];
+
+    for (int j = 0; j < temp2.length; j++) {
+      int total_number = 0;
+      num sum = 0;
+
+      for (int i = 0; i < length_of_all_data; i++) {
+        if (selectedItem == 'Auti Spark' && all_data[i]['Game ID'] == 1) {
+          //only if game is auti spark if want for some other game use other if condition
+          if (selectedItem2 == all_data[i]['Level'].toString()) {
+            if (temp2[j] == all_data[i]['Date']) {
+              total_number += 1;
+              sum += all_data[i]['Time taken'];
+            }
+          }
+        }
+      }
+      num daily_avg = sum / total_number;
+      print(sum);
+      print(total_number);
+      print(daily_avg);
+      temp3.add([temp2[j], daily_avg]);
+
+      data.add(DeveloperSeries(
+          year: new DateTime(
+              int.parse(temp2[j].substring(0, 4)), //to enter year
+              int.parse(temp2[j].substring(5, 7)), //to enter month
+              int.parse(temp2[j].substring(8, 10)) //to enter day
+              ),
+          developers: daily_avg / 1000,
+          barColor: charts.ColorUtil.fromDartColor(Colors.green)));
+    }
+    print(temp3);
+    print(data.runtimeType);
+    _data = data;
+    print(_data.runtimeType);
   }
 
-  //
-  final List<DeveloperSeries> data = [
-    DeveloperSeries(
-      year: 2017,
-      developers: 40000,
-      barColor: charts.ColorUtil.fromDartColor(Colors.green),
-    ),
-    DeveloperSeries(
-      year: 2018,
-      developers: 5000,
-      barColor: charts.ColorUtil.fromDartColor(Colors.green),
-    ),
-    DeveloperSeries(
-      year: 2019,
-      developers: 40000,
-      barColor: charts.ColorUtil.fromDartColor(Colors.green),
-    ),
-    DeveloperSeries(
-      year: 2020,
-      developers: 35000,
-      barColor: charts.ColorUtil.fromDartColor(Colors.green),
-    ),
-    DeveloperSeries(
-      year: 2021,
-      developers: 45000,
-      barColor: charts.ColorUtil.fromDartColor(Colors.green),
-    ),
-  ];
+  @override
+  void initState() {
+    performance_data();
+    super.initState();
+  }
 
-  final List<DeveloperSeries> data2 = [
-    DeveloperSeries(
-      year: 5,
-      developers: 60000,
-      barColor: charts.ColorUtil.fromDartColor(Colors.green),
-    ),
-    DeveloperSeries(
-      year: 6,
-      developers: 5000,
-      barColor: charts.ColorUtil.fromDartColor(Colors.green),
-    ),
-    DeveloperSeries(
-      year: 7,
-      developers: 40000,
-      barColor: charts.ColorUtil.fromDartColor(Colors.green),
-    ),
-    DeveloperSeries(
-      year: 8,
-      developers: 35000,
-      barColor: charts.ColorUtil.fromDartColor(Colors.green),
-    ),
-    DeveloperSeries(
-      year: 9,
-      developers: 45000,
-      barColor: charts.ColorUtil.fromDartColor(Colors.green),
-    ),
-  ];
+  // List<DeveloperSeries> tempData = [
+  //   new DeveloperSeries(
+  //       year: DateTime(2017, 9, 19),
+  //       developers: 5,
+  //       barColor: charts.ColorUtil.fromDartColor(Colors.green)),
+  //   new DeveloperSeries(
+  //       year: DateTime(2017, 9, 26),
+  //       developers: 25,
+  //       barColor: charts.ColorUtil.fromDartColor(Colors.green)),
+  //   new DeveloperSeries(
+  //       year: DateTime(2017, 10, 3),
+  //       developers: 100,
+  //       barColor: charts.ColorUtil.fromDartColor(Colors.green)),
+  //   new DeveloperSeries(
+  //       year: DateTime(2017, 10, 10),
+  //       developers: 75,
+  //       barColor: charts.ColorUtil.fromDartColor(Colors.green)),
+  // ];
+
+  //
+  // final List<DeveloperSeries> data = [
+  //   DeveloperSeries(
+  //     year: 2017,
+  //     developers: 40000,
+  //     barColor: charts.ColorUtil.fromDartColor(Colors.green),
+  //   ),
+  //   DeveloperSeries(
+  //     year: 2018,
+  //     developers: 5000,
+  //     barColor: charts.ColorUtil.fromDartColor(Colors.green),
+  //   ),
+  //   DeveloperSeries(
+  //     year: 2019,
+  //     developers: 40000,
+  //     barColor: charts.ColorUtil.fromDartColor(Colors.green),
+  //   ),
+  //   DeveloperSeries(
+  //     year: 2020,
+  //     developers: 35000,
+  //     barColor: charts.ColorUtil.fromDartColor(Colors.green),
+  //   ),
+  //   DeveloperSeries(
+  //     year: 2021,
+  //     developers: 45000,
+  //     barColor: charts.ColorUtil.fromDartColor(Colors.green),
+  //   ),
+  // ];
+
+  // final List<DeveloperSeries> data2 = [
+  //   DeveloperSeries(
+  //     year: 14,
+  //     developers: 6000,
+  //     barColor: charts.ColorUtil.fromDartColor(Colors.green),
+  //   ),
+  //   DeveloperSeries(
+  //     year: 15,
+  //     developers: 5000,
+  //     barColor: charts.ColorUtil.fromDartColor(Colors.green),
+  //   ),
+  //   DeveloperSeries(
+  //     year: 16,
+  //     developers: 40000,
+  //     barColor: charts.ColorUtil.fromDartColor(Colors.green),
+  //   ),
+  //   DeveloperSeries(
+  //     year: 17,
+  //     developers: 35000,
+  //     barColor: charts.ColorUtil.fromDartColor(Colors.green),
+  //   ),
+  //   DeveloperSeries(
+  //     year: 18,
+  //     developers: 45000,
+  //     barColor: charts.ColorUtil.fromDartColor(Colors.green),
+  //   ),
+  // ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -263,7 +337,12 @@ class _progressState extends State<progress> {
               ),
               RaisedButton(
                 onPressed: () async {
-                  performance_data();
+                  print("hehe");
+                  print(_data);
+                  print("hehe");
+                  //await performance_data();
+
+                  print(_data);
                 },
                 child: Text("update data with doc id"),
               ),
@@ -276,18 +355,18 @@ class _progressState extends State<progress> {
               ),
               Center(
                 child: DeveloperChart(
-                  data: data,
+                  data: _data,
                 ),
               ),
               Text(
                 "Change in Accuracy",
                 style: graph_heading,
               ),
-              Center(
-                child: DeveloperChart(
-                  data: data2,
-                ),
-              ),
+              // Center(
+              //   child: DeveloperChart(
+              //     data: data,
+              //   ),
+              // ),
             ],
           ),
         ),

@@ -17,19 +17,21 @@ class _profileState extends State<profile> {
       // scaffold does not have background image property so used container
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('assets/background1.png'),
+            image: AssetImage('assets/sign_up.png'),
             fit: BoxFit.cover), //fit to resize image and cover full screen
       ),
       child: Scaffold(
         backgroundColor: Colors
             .transparent, //default colour is white which will hide background pic so set it as transparent
+        appBar: AppBar(
+          elevation: 0.0,
+          // backgroundColor: Colors.lightBlue[400],
+          backgroundColor: Colors.transparent, //appbar colour is tran
+        ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 50,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

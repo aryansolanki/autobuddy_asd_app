@@ -285,7 +285,7 @@ class _ProfileFormState extends State<ProfileForm> {
                       child: Text(
                         'Update Profile',
                         style: TextStyle(
-                          fontSize: 30.0,
+                          fontSize: 25.0,
                           fontFamily: text1,
                           color: Colors.white,
                         ),

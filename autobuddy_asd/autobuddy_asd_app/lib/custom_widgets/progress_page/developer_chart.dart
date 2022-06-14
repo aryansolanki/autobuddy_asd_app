@@ -8,7 +8,7 @@ class DeveloperChart extends StatelessWidget {
   DeveloperChart({required this.data});
   @override
   Widget build(BuildContext context) {
-    List<charts.Series<DeveloperSeries, num>> series = [
+    List<charts.Series<DeveloperSeries, DateTime>> series = [
       charts.Series(
           id: "developers",
           data: data,
@@ -26,12 +26,12 @@ class DeveloperChart extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Expanded(
-                child: charts.LineChart(series,
-                    domainAxis: const charts.NumericAxisSpec(
-                      tickProviderSpec:
-                          charts.BasicNumericTickProviderSpec(zeroBound: false),
-                      viewport: charts.NumericExtents(5, 9),
-                    ),
+                child: charts.TimeSeriesChart(series,
+                    // domainAxis: const charts.NumericAxisSpec(
+                    //   tickProviderSpec:
+                    //       charts.BasicNumericTickProviderSpec(zeroBound: false),
+                    //   viewport: charts.NumericExtents(14, 18),
+                    // ),
                     animate: true),
               )
             ],
