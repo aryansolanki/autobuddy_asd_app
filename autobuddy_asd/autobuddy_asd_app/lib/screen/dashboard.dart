@@ -147,7 +147,7 @@ class _dashboardState extends State<dashboard> {
             ),
             RaisedButton(
               onPressed: () async {
-                await read_collection(user_uid);
+                print(await read_collection(user_uid));
               },
               child: Text("read all record in game with doc id"),
             ),

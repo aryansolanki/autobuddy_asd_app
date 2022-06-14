@@ -68,6 +68,5 @@ Future read_collection(dynamic user_uid) async {
       .collection("records");
   QuerySnapshot querySnapshot = await _collectionRef.get();
   final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
-  print(
-      allData); //NOTE:- this allData is List so can use list indexing and has dictionary as elements
+  return (allData); //NOTE:- this allData is List so can use list indexing and has dictionary as elements
 }

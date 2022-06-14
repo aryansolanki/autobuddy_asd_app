@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:autobuddy_asd_app/custom_widgets/progress_page/developer_series.dart';
 import 'package:autobuddy_asd_app/custom_widgets/progress_page/developer_chart.dart';
 import 'package:autobuddy_asd_app/custom_widgets/sign_up_page/theme.dart';
+
+//custom function to update and read database
+import 'package:autobuddy_asd_app/services/query.dart';
+//auth service import
+import 'package:autobuddy_asd_app/services/auth.dart';
 //plugin
 import 'package:charts_flutter/flutter.dart' as charts;
 
@@ -13,6 +18,12 @@ class progress extends StatefulWidget {
 }
 
 class _progressState extends State<progress> {
+  //for dropdown menu for game selection
+  var selection_of_game = [
+    'Auti Spark',
+  ];
+  String selectedItem = 'Auti Spark';
+
   //for dropdown menu1
   var time_period = [
     'Past 1 Month',
@@ -24,9 +35,25 @@ class _progressState extends State<progress> {
   String selectedItem1 = 'Past 1 Month';
 
   //for dropdown menu2
-  var level = ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5'];
-  String selectedItem2 = 'Level 1';
+  var level = ['2', '3', '4', '5', '6'];
+  String selectedItem2 = '2';
 
+  //to get data
+  performance_data() async {
+    List all_data = await read_collection(user_uid);
+    int length_of_all_data = all_data.length;
+    // print(all_data[0]['Level']);
+    for (int i = 0; i < length_of_all_data; i++) {
+      if (selectedItem == 'Auti Spark' && all_data[i]['Game ID'] == 1) {
+        //only if game is auti spark if want for some other game use other if condition
+        if (selectedItem2 == all_data[i]['Level'].toString()) {
+          print(all_data[i]);
+        }
+      }
+    }
+  }
+
+  //
   final List<DeveloperSeries> data = [
     DeveloperSeries(
       year: 2017,
@@ -111,6 +138,51 @@ class _progressState extends State<progress> {
                 height: 15,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //dropdown menu 1
+                  Text(
+                    "Game Name",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(color: Colors.black, width: 2),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      //to hide underline from drop down
+                      child: DropdownButton(
+                        value: selectedItem, //currently selected item
+                        icon: Icon(Icons.keyboard_arrow_down),
+                        items: selection_of_game.map((String items) {
+                          //to make elements of selection_of_game variable to dropdown
+                          return DropdownMenuItem(
+                            child: Text(items),
+                            value: items,
+                          );
+                        }).toList(),
+                        onChanged: (dynamic newValue) {
+                          //to show new value selected
+                          setState(() {
+                            selectedItem = newValue;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
                     width: 10,
@@ -188,6 +260,12 @@ class _progressState extends State<progress> {
                     ),
                   ),
                 ],
+              ),
+              RaisedButton(
+                onPressed: () async {
+                  performance_data();
+                },
+                child: Text("update data with doc id"),
               ),
               SizedBox(
                 height: 10,
