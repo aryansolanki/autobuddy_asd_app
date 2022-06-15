@@ -20,7 +20,7 @@ class progress extends StatefulWidget {
 }
 
 class _progressState extends State<progress> {
-  late List<DeveloperSeries> _data = [];
+  late List<DeveloperSeries> final_data = [];
 
   //for dropdown menu for game selection
   var selection_of_game = [
@@ -97,8 +97,8 @@ class _progressState extends State<progress> {
     }
     print(temp3);
     print(data.runtimeType);
-    _data = data;
-    print(_data.runtimeType);
+    final_data = data;
+    print(final_data.runtimeType);
   }
 
   @override
@@ -338,13 +338,20 @@ class _progressState extends State<progress> {
               RaisedButton(
                 onPressed: () async {
                   print("hehe");
-                  print(_data);
+                  print(final_data);
                   print("hehe");
-                  //await performance_data();
+                  await performance_data();
 
-                  print(_data);
+                  print(final_data);
                 },
                 child: Text("update data with doc id"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  // await performance_data();
+                  initState();
+                },
+                child: Text("rebuild"),
               ),
               SizedBox(
                 height: 10,
@@ -355,7 +362,7 @@ class _progressState extends State<progress> {
               ),
               Center(
                 child: DeveloperChart(
-                  data: _data,
+                  data: final_data,
                 ),
               ),
               Text(

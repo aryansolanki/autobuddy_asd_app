@@ -2,16 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:autobuddy_asd_app/custom_widgets/progress_page/developer_series.dart';
 
-class DeveloperChart extends StatelessWidget {
+class DeveloperChart extends StatefulWidget {
   final List<DeveloperSeries> data;
 
   DeveloperChart({required this.data});
+
+  @override
+  State<DeveloperChart> createState() => _DeveloperChartState();
+}
+
+class _DeveloperChartState extends State<DeveloperChart> {
   @override
   Widget build(BuildContext context) {
     List<charts.Series<DeveloperSeries, DateTime>> series = [
       charts.Series(
           id: "developers",
-          data: data,
+          data: widget.data,
           domainFn: (DeveloperSeries series, _) => series.year,
           measureFn: (DeveloperSeries series, _) => series.developers,
           colorFn: (DeveloperSeries series, _) => series.barColor)

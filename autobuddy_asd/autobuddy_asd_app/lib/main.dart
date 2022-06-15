@@ -1,4 +1,5 @@
 //basic import
+import 'package:autobuddy_asd_app/custom_widgets/progress_page/developer_series.dart';
 import 'package:flutter/material.dart';
 
 //screen and other widget import
