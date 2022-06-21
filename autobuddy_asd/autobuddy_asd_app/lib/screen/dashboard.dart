@@ -122,35 +122,35 @@ class _dashboardState extends State<dashboard> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 20.0,
-            ),
-            RaisedButton(
-              onPressed: () async {
-                print(read_data(user_uid));
-              },
-              child: Text("record with doc id"),
-            ),
-            RaisedButton(
-              onPressed: () async {
-                await update_data(user_uid, 'Name', "hehe");
-                print(await read_data(user_uid));
-              },
-              child: Text("update data with doc id"),
-            ),
-            RaisedButton(
-              onPressed: () async {
-                await DatabaseService(uid: user_uid).add_record(1, 2, 3, 4);
-                await DatabaseService(uid: user_uid).add_record(5, 6, 7, 8);
-              },
-              child: Text("add record in game with doc id"),
-            ),
-            RaisedButton(
-              onPressed: () async {
-                print(await read_collection(user_uid));
-              },
-              child: Text("read all record in game with doc id"),
-            ),
+            // SizedBox(
+            //   height: 20.0,
+            // ),
+            // RaisedButton(
+            //   onPressed: () async {
+            //     print(read_data(user_uid));
+            //   },
+            //   child: Text("record with doc id"),
+            // ),
+            // RaisedButton(
+            //   onPressed: () async {
+            //     await update_data(user_uid, 'Name', "hehe");
+            //     print(await read_data(user_uid));
+            //   },
+            //   child: Text("update data with doc id"),
+            // ),
+            // RaisedButton(
+            //   onPressed: () async {
+            //     await DatabaseService(uid: user_uid).add_record(1, 2, 3, 4);
+            //     await DatabaseService(uid: user_uid).add_record(5, 6, 7, 8);
+            //   },
+            //   child: Text("add record in game with doc id"),
+            // ),
+            // RaisedButton(
+            //   onPressed: () async {
+            //     print(await read_collection(user_uid));
+            //   },
+            //   child: Text("read all record in game with doc id"),
+            // ),
           ]),
         ),
       ),

@@ -347,8 +347,8 @@ class _progressState extends State<progress> {
                 child: Text("update data with doc id"),
               ),
               RaisedButton(
-                onPressed: () {
-                  // await performance_data();
+                onPressed: () async {
+                  await performance_data();
                   initState();
                 },
                 child: Text("rebuild"),
