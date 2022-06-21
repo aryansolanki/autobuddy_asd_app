@@ -1,0 +1,4 @@
+.aap file in 
+√ Built build\app\outputs\bundle\release\app-release.aab (60.3MB).
+.apk file in 
+√ Built build\app\outputs\flutter-apk\app-release.apk (79.0MB).
