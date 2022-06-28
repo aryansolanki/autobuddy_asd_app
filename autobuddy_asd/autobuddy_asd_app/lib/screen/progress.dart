@@ -47,6 +47,7 @@ class _progressState extends State<progress> {
     final List<DeveloperSeries> data = [];
     List temp1 = []; //to save date and get unique date
     List all_data = await read_collection(user_uid);
+    print(all_data);
     int length_of_all_data = all_data.length;
     // print(all_data[0]['Level']);
     for (int i = 0; i < length_of_all_data; i++) {
@@ -97,7 +98,11 @@ class _progressState extends State<progress> {
     }
     print(temp3);
     print(data.runtimeType);
-    final_data = data;
+    setState(() {
+      final_data = data;
+    });
+
+    print(final_data);
     print(final_data.runtimeType);
   }
 
@@ -328,6 +333,7 @@ class _progressState extends State<progress> {
                           //to show new value selected
                           setState(() {
                             selectedItem2 = newValue;
+                            initState();
                           });
                         },
                       ),
