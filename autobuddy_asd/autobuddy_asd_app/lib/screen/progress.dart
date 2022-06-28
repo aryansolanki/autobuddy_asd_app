@@ -335,24 +335,24 @@ class _progressState extends State<progress> {
                   ),
                 ],
               ),
-              RaisedButton(
-                onPressed: () async {
-                  print("hehe");
-                  print(final_data);
-                  print("hehe");
-                  await performance_data();
+              // RaisedButton(
+              //   onPressed: () async {
+              //     print("hehe");
+              //     print(final_data);
+              //     print("hehe");
+              //     await performance_data();
 
-                  print(final_data);
-                },
-                child: Text("update data with doc id"),
-              ),
-              RaisedButton(
-                onPressed: () async {
-                  await performance_data();
-                  initState();
-                },
-                child: Text("rebuild"),
-              ),
+              //     print(final_data);
+              //   },
+              //   child: Text("update data with doc id"),
+              // ),
+              // RaisedButton(
+              //   onPressed: () async {
+              //     await performance_data();
+              //     initState();
+              //   },
+              //   child: Text("rebuild"),
+              // ),
               SizedBox(
                 height: 10,
               ),
@@ -369,11 +369,11 @@ class _progressState extends State<progress> {
                 "Change in Accuracy",
                 style: graph_heading,
               ),
-              // Center(
-              //   child: DeveloperChart(
-              //     data: data,
-              //   ),
-              // ),
+              Center(
+                child: DeveloperChart(
+                  data: final_data,
+                ),
+              ),
             ],
           ),
         ),

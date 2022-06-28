@@ -360,7 +360,6 @@ class _SignUpFormState extends State<SignUpForm> {
                                 await update_data(user_uid, 'E-mail ID', email);
                                 await update_data(
                                     user_uid, 'Password', password);
-                                Navigator.pop(context);
                               }
 
                               print("$child_name");
@@ -371,6 +370,7 @@ class _SignUpFormState extends State<SignUpForm> {
                               print("$phone_number");
                               print("$email");
                               print("$password");
+                              Navigator.pop(context);
 
                               //Navigator.of(context).pushNamed("/dashboard"); //------------>enter routing here after login
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

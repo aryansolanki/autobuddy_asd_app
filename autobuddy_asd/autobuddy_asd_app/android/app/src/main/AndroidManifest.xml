@@ -2,9 +2,9 @@
     package="com.example.autobuddy_asd_app">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="AutiSpark"
+        android:label="Autobuddys"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"> 
         <activity
             android:name=".MainActivity"
             android:exported="true"
