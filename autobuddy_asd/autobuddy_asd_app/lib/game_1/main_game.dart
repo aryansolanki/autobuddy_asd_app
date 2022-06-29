@@ -27,6 +27,7 @@ class _Game_1State extends State<Game_1> {
 
   //initial question number=2, if matched in less than threshold time then number of question will be increased by 1 to max 6
   int difficulty = 2;
+  dynamic dimension = 150.0;
 
   //stopwatch
   final stopwatch = Stopwatch();
@@ -93,18 +94,22 @@ class _Game_1State extends State<Game_1> {
 
   //difficulty setter
   difficulty_setter(dynamic time_taken_for_current_level) {
-    if (time_taken_for_current_level < 120000 && difficulty == 2) {
-      //answer from value_of_stopwatch is in milisecond so to set time less than 2 minutes, 2*60*1000
+    if (time_taken_for_current_level < 90000 && difficulty == 2) {
+      //answer from value_of_stopwatch is in milisecond so to set time less than 1.5 minutes, 1.5*60*1000
       difficulty = 3;
-    } else if (time_taken_for_current_level < 180000 && difficulty == 3) {
-      //answer from value_of_stopwatch is in milisecond so to set time less than 3 minutes, 3*60*1000
+      dimension = 135.0;
+    } else if (time_taken_for_current_level < 120000 && difficulty == 3) {
+      //answer from value_of_stopwatch is in milisecond so to set time less than 2 minutes, 2*60*1000
       difficulty = 4;
-    } else if (time_taken_for_current_level < 240000 && difficulty == 4) {
-      //answer from value_of_stopwatch is in milisecond so to set time less than 4 minutes, 4*60*1000
+      dimension = 120.0;
+    } else if (time_taken_for_current_level < 150000 && difficulty == 4) {
+      //answer from value_of_stopwatch is in milisecond so to set time less than 2.5 minutes, 2.5*60*1000
       difficulty = 5;
-    } else if (time_taken_for_current_level < 300000 && difficulty == 5) {
-      //answer from value_of_stopwatch is in milisecond so to set time less than 5 minutes, 5*60*1000
+      dimension = 105.0;
+    } else if (time_taken_for_current_level < 180000 && difficulty == 5) {
+      //answer from value_of_stopwatch is in milisecond so to set time less than 3 minutes, 3*60*1000
       difficulty = 6;
+      dimension = 90.0;
     }
   }
 
@@ -126,6 +131,23 @@ class _Game_1State extends State<Game_1> {
     // print(shuffled_question);
     return shuffled_question;
   }
+
+  //image size setter
+  // size_setter(int difficulty) {
+  //   if (difficulty == 2) {
+  //     //answer from value_of_stopwatch is in milisecond so to set time less than 1.5 minutes, 1.5*60*1000
+  //     dimension = 10.0;
+  //   } else if (difficulty == 3) {
+  //     //answer from value_of_stopwatch is in milisecond so to set time less than 2 minutes, 2*60*1000
+  //     dimension = 10.0;
+  //   } else if (difficulty == 4) {
+  //     //answer from value_of_stopwatch is in milisecond so to set time less than 2.5 minutes, 2.5*60*1000
+  //     dimension = 10.0;
+  //   } else if (difficulty == 5) {
+  //     //answer from value_of_stopwatch is in milisecond so to set time less than 3 minutes, 3*60*1000
+  //     dimension = 10.0;
+  //   }
+  // }
 
   //for checking when to show loading widget
   bool loading = false;
@@ -166,18 +188,18 @@ class _Game_1State extends State<Game_1> {
                               data: item,
                               childWhenDragging: Image.asset(
                                 item.icon,
-                                height: 75.0,
-                                width: 75.0,
+                                height: dimension,
+                                width: dimension,
                               ),
                               feedback: Image.asset(
                                 item.icon,
-                                height: 75.0,
-                                width: 75.0,
+                                height: dimension,
+                                width: dimension,
                               ),
                               child: Image.asset(
                                 item.icon,
-                                height: 75.0,
-                                width: 75.0,
+                                height: dimension,
+                                width: dimension,
                               ),
                             ),
                           );
@@ -218,8 +240,8 @@ class _Game_1State extends State<Game_1> {
                               builder: (context, acceptedItems, rejectedItem) =>
                                   Image.asset(
                                 item.icon,
-                                height: 75.0,
-                                width: 75.0,
+                                height: dimension,
+                                width: dimension,
                               ),
                             ),
                           );
